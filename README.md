@@ -29,7 +29,11 @@ module "service_mesh" {
   additional_yaml_config = yamlencode({ "identity" : { "issuer" : { "clockSkewAllowance" : "30s" } } })
 
   extensions = ["viz"]
+
+  prometheus_url = "prometheus-aks-app-doliv-dev.us-doliv-dev.azure.lnrsg.io"
+  grafana_url    = "grafana-aks-app-doliv-dev.us-doliv-dev.azure.lnrsg.io"
 }
+
 ```
 
 ## Inputs
@@ -44,13 +48,15 @@ module "service_mesh" {
 | <a name="input_certificate_webhook_duration"></a> [certificate\_webhook\_duration](#input\_certificate\_webhook\_duration) | Number of hours for webhook certification expiration | `string` | `"1440h0m0s"` | no |
 | <a name="input_certificate_webhook_renewbefore"></a> [certificate\_webhook\_renewbefore](#input\_certificate\_webhook\_renewbefore) | Number of hours before the webhook certification expiration to request for certificate renewal | `string` | `"48h0m0s"` | no |
 | <a name="input_chart_namespace"></a> [chart\_namespace](#input\_chart\_namespace) | Namespace to install linkerd. | `string` | `"linkerd"` | no |
-| <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | Helm chart repository | `string` | `"https://helm.linkerd.io/stable"` | no |
+| <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | Helm chart repository | `string` | `"https://helm.linkerd.io/edge"` | no |
 | <a name="input_chart_timeout"></a> [chart\_timeout](#input\_chart\_timeout) | The number of seconds to wait for the linkerd chart to be deployed. the default is 900 (15 minutes) | `string` | `"900"` | no |
-| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Helm chart version | `string` | `"2.11.1"` | no |
+| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Helm chart version | `string` | `"1.0.0-edge"` | no |
 | <a name="input_cni_enabled"></a> [cni\_enabled](#input\_cni\_enabled) | Whether to enable the cni plugin. | `bool` | `true` | no |
 | <a name="input_extensions"></a> [extensions](#input\_extensions) | Linkerd extensions to install. | `set(string)` | <pre>[<br>  "viz"<br>]</pre> | no |
+| <a name="input_grafana_url"></a> [grafana\_url](#input\_grafana\_url) | Endpoint for existing grafana deployment. | `string` | `null` | no |
 | <a name="input_ha_enabled"></a> [ha\_enabled](#input\_ha\_enabled) | Whether to enable high availability settings. | `bool` | `true` | no |
 | <a name="input_issuer_validity_hours"></a> [issuer\_validity\_hours](#input\_issuer\_validity\_hours) | Number of hours for which the issuer certification is valid (must be shorter than the trust anchor) | `number` | `8760` | no |
+| <a name="input_prometheus_url"></a> [prometheus\_url](#input\_prometheus\_url) | Endpoint for existing prometheus deployment. | `string` | `null` | no |
 | <a name="input_trust_anchor_validity_hours"></a> [trust\_anchor\_validity\_hours](#input\_trust\_anchor\_validity\_hours) | Number of hours for which the trust anchor certification is valid | `number` | `17520` | no |
 
 ## Outputs
